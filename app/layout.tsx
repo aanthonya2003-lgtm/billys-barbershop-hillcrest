@@ -27,7 +27,11 @@ const dmMono = DM_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://billysbarbershop.vercel.app"),
+  metadataBase: new URL(
+    process.env.VERCEL_URL
+      ? `https://${process.env.VERCEL_URL}`
+      : "https://billys-barbershop-hillcrest.vercel.app"
+  ),
   title: {
     default:
       "Billy's Barbershop — Hillcrest's Premier Barbershop | San Diego",
