@@ -26,12 +26,14 @@ const dmMono = DM_Mono({
   display: "swap",
 });
 
+const siteUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL
+  ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+  : process.env.VERCEL_URL
+    ? `https://${process.env.VERCEL_URL}`
+    : "https://billys-barbershop-hillcrest.vercel.app";
+
 export const metadata: Metadata = {
-  metadataBase: new URL(
-    process.env.VERCEL_URL
-      ? `https://${process.env.VERCEL_URL}`
-      : "https://billys-barbershop-hillcrest.vercel.app"
-  ),
+  metadataBase: new URL(siteUrl),
   title: {
     default:
       "Billy's Barbershop — Hillcrest's Premier Barbershop | San Diego",
@@ -52,7 +54,7 @@ export const metadata: Metadata = {
     title: "Billy's Barbershop — Hillcrest's Premier Barbershop",
     description:
       "5.0 stars · 307 reviews. Master fades, beard work, hot towel shaves in Hillcrest, San Diego. Cut · Razor · Wash · Style from $40.",
-    url: "https://billysbarbershop.vercel.app",
+    url: "/",
     siteName: site.name,
     locale: "en_US",
     type: "website",
@@ -62,7 +64,7 @@ export const metadata: Metadata = {
     follow: true,
   },
   alternates: {
-    canonical: "https://billysbarbershop.vercel.app",
+    canonical: "/",
   },
 };
 
@@ -78,7 +80,7 @@ const jsonLd = {
   name: site.name,
   description:
     "Hillcrest's premier barbershop. Master fades, beard work, and hot towel shaves in San Diego.",
-  url: "https://billysbarbershop.vercel.app",
+  url: siteUrl,
   telephone: site.phone.display,
   founder: site.owner,
   priceRange: "$$",
