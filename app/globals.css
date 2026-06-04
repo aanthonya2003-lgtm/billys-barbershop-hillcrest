@@ -76,7 +76,7 @@ html.lenis body {
   font-family: var(--font-mono);
 }
 
-/* Dynamic viewport — never 100vh */
+/* Dynamic viewport units only — full-height utilities */
 .min-h-dvh {
   min-height: 100dvh;
 }
