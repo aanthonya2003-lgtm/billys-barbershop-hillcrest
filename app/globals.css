@@ -1,0 +1,176 @@
+@import "tailwindcss";
+
+/* ============================================================
+   BILLY'S BARBERSHOP — DESIGN TOKENS (locked)
+   Barbershop noir · barber gold · barber red · aged paper
+   ============================================================ */
+@theme {
+  --color-bg: #0c0c0c;
+  --color-surface: #161616;
+  --color-border: rgba(212, 175, 55, 0.12);
+  --color-gold: #d4af37;
+  --color-red: #b91c1c;
+  --color-paper: #f0ebe1;
+  --color-muted: #7a7060;
+  --color-subtle: #2e2e2e;
+
+  --font-display: var(--font-playfair), Georgia, serif;
+  --font-body: var(--font-dm-sans), system-ui, sans-serif;
+  --font-mono: var(--font-dm-mono), ui-monospace, monospace;
+
+  --ease-precision: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ============================================================
+   BASE
+   ============================================================ */
+* {
+  border-color: var(--color-border);
+}
+
+html {
+  scroll-behavior: auto;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-paper);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+::selection {
+  background-color: var(--color-gold);
+  color: var(--color-bg);
+}
+
+/* Lenis baseline */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* ============================================================
+   UTILITIES
+   ============================================================ */
+.font-display {
+  font-family: var(--font-display);
+}
+
+.font-body {
+  font-family: var(--font-body);
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+/* Dynamic viewport — never 100vh */
+.min-h-dvh {
+  min-height: 100dvh;
+}
+
+.h-dvh {
+  height: 100dvh;
+}
+
+/* Film grain overlay — pure CSS, no asset */
+.grain::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.04;
+  z-index: 1;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Barber-pole diagonal stripe — animated, asset-free */
+.barber-pole {
+  background-image: repeating-linear-gradient(
+    45deg,
+    var(--color-red) 0,
+    var(--color-red) 14px,
+    var(--color-paper) 14px,
+    var(--color-paper) 28px,
+    var(--color-gold) 28px,
+    var(--color-gold) 42px,
+    var(--color-paper) 42px,
+    var(--color-paper) 56px
+  );
+  background-size: 200% 200%;
+  animation: barber-spin 6s linear infinite;
+}
+
+@keyframes barber-spin {
+  to {
+    background-position: -79.2px 0;
+  }
+}
+
+/* Services marquee — infinite ticker */
+.marquee-track {
+  animation: marquee 28s linear infinite;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+/* Ghost watermark base */
+.ghost {
+  position: absolute;
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--color-paper);
+  opacity: 0.05;
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+  line-height: 0.8;
+  z-index: 0;
+}
+
+/* GPU hints */
+.will-parallax {
+  will-change: transform;
+}
+
+/* ============================================================
+   ACCESSIBILITY — reduced motion
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .barber-pole,
+  .marquee-track {
+    animation: none !important;
+  }
+}
