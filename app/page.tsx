@@ -5,17 +5,27 @@ import { Team } from "@/components/Team";
 import { BrandsMarquee } from "@/components/BrandsMarquee";
 import { StorySection } from "@/components/StorySection";
 import { VisitUs } from "@/components/VisitUs";
+import { BookingCTA } from "@/components/BookingCTA";
+import { Footer } from "@/components/Footer";
+import { ScrollProgress } from "@/components/ScrollProgress";
+import { StickyCTA } from "@/components/StickyCTA";
 
 export default function Home() {
   return (
-    <main>
-      <Hero />
-      <SocialProof />
-      <Services />
-      <Team />
-      <BrandsMarquee />
-      <StorySection />
-      <VisitUs />
-    </main>
+    <>
+      <ScrollProgress />
+      <main>
+        <Hero />
+        <SocialProof />
+        <Services />
+        <Team />
+        <BrandsMarquee />
+        <StorySection />
+        <VisitUs />
+        <BookingCTA />
+        <Footer />
+      </main>
+      <StickyCTA />
+    </>
   );
 }
